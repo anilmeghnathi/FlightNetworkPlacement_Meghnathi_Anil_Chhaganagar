@@ -1,0 +1,190 @@
+Respected Sir/Mam;
+
+I have created this game using Circular Linked List.
+I have done it in vary simple way.I have not used any kind of Grafics properties.
+It may be possible that in some way my logic may not be perfectly correct.So please ignore it .Thanks.
+Algorithm and Description of the program is given below.
+
+---------------------------Algorithm insert(name)------------------------------------------------------------------------------------------
+
+Algorithm: INSERT(NAME,FIRST_CHILD)
+
+This algorithm add the kid at the end of the list.FAKE_CHILD is tepm node.
+
+Step 1:[OverFlow?]If AVAIL=NULL then Write NO FREE SPCE AVAILABLE and Exit.
+
+Step 2:[Remove one Node from Memory List]
+             set NEW:=AVAIL and AVAIL:=ADDR[AVAIL](AVAIL points to next free node in memory)
+
+Step 3:Set CHILD_NAME[NEW]:=NAME(Copies Name into New node)
+
+Step 4:Set ADDR[NEW]:=NEW(New node points to itself).
+
+Step 5:If FIRST_CHILD=NULL then Set FIRST_CHILD:=NEW_CHILD
+             Else FAKE_CHILD=FIRST_CHILD[ADDR] and Repeat Steps 6   While(FAKE_CHILD[ADDR]!=FIRST_CHILD) and Step 7
+
+Step 6:Set FAKE_CHILD:=FAKE_CHILD[ADDR]
+
+Step 7:Set NEW_CHILD[ADDR]:=FAKE_CHILD[ADDR] and Set FAKE_CHILD[ADDR]:=NEW_CHILD
+
+Step 8:RETURN
+
+---------------------------------------------------Algorithm SHOW_REMAINING(FIRST_CHILD)----------------------------------------------------------------
+
+This algorithm is used to show the remaining kids in the game .FAKE_CHILD is temp node.
+
+Step 1:Write FIRST_CHILD[NAME]
+
+Step 2:Set FAKE_CHILD:=FIRST_CHILD[ADDR] and Repeat Step 3 While FAKE_CHILD!=FIRST_CHILD
+
+Step 3: Write FAKE_CHILD[NAME] and Set FAKE_CHILD:=FAKE_CHILD[ADDR]
+
+Step 4:Return
+----------------------------------------------------Algorithm NEW_TERN(NO,FIRST_CHILD)---------------------------------------------------------------------
+
+This algorithm Eliminate kid at the position NO. FAKE_CHILD and PCHILD are temp node.i is temp integer.
+
+Step 1:If NO=1 then Write FIRST_CHILD[NAME] and Step2 and Step3 Else Set FAKE_CHILD:=FIRST_CHILD Step 4
+
+Step2 :Set FAKE_CHILD:=FIRST_CHILD[ADDR] and Repeat Step 3 While FAKE_CHILD!=FIRST_CHILD
+
+Step 3:Set PCHILD:=FAKE_CHILD and Set FAKE_CHILD=FAKE_CHILD[ADDR]
+
+Step 4:Repeat Step5 For i=1 to NO and Set PCHILD[ADDR]:=FAKE_CHILD[ADDR] and Write  FAKE_CHILD[NAME]
+
+Step 5:Set PCHILD:=FAKE_CHILD and Set FAKE_CHILD:=FAKE_CHILD[ADDR] and Set FIRST_CHILD:=PCHILD[ADDR]
+
+Step  6:Return 
+
+
+----------------------------------------------------Algorithm MAIN(MO,NO)----------------------------------------------------------------------------------------------
+
+This algorithm is for main function.a is temp integer.FIRST_CHILD is the first node.NO is Random Number for eliminate kid.MO is tot number of children.NAME is name of kid.
+
+Step 1:Repeat  Step 2 For a=1 to MO
+
+Step 2:Take NAME from KeyBoard and INSERT(NAME,FIRST_CHILD)
+
+Step 3:Repeat Step 4 While FIRST_CHILD[ADDR]!=FIRST_CHILD
+
+Step 4:NEW_TURN(NO,FIRST_CHILD) and SHOW_REMAINING(FIRST_CHILD)
+
+Step 5:Write FIRST_CHILD[NAME] won the game.
+
+Step 6:Exit
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Program Description
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+struct child
+{
+char child_name[50];      <--- Store name of the kid.
+struct child *addr;            <----Store the address of the next node in the Linked List.
+};
+
+This code is used for creating a new node of the Linked List.structure member are as shown above.Here there is no need for structure variable.
+
+
+typedef struct child child;       <--- Used for giving Data Type a user define name.
+child *first_child=NULL;          <--- Initially there is no child is there so NULL.
+
+first_child is used to store starting address of the linked list...
+
+void insert(char[]);
+void show_remaining();       <--- These all are Function declarations...!!
+void new_turn(int);
+
+---------------------------------------------------------------------------------main()--------------------------------------------------------------------------------
+Now we enter into the main().Here char na[50]    <---- For storing name of kid.
+int a      <--- For for loop.
+int tot   <--- For Total How many kids are there. 
+int no   <--- Any Random No which is used to eliminate the kid.
+
+  clrscr();                               <---- Used to clear the screan...
+  one_more_time:              <---- This is the label which is used to jump control when we want to start the Game again..
+
+while(tot<=1)                     <---Here there is no meaning of playing game if there is only 1 or less then 1 kid.     
+{                   }                       <--- So this loop is used...!!
+
+ first_child=NULL;           <--- Because every time game start it create  new Linked List.
+
+ for(a=1;a<=tot;a++)       <---- Take Name of all kids using this for loop.
+ {   
+    insert(na) ;                   <---- add kid to the linke list
+}
+
+show_remaining()        <--- show all the  kid in the game.
+
+
+  while(first_child->addr!=first_child)          <--- condition is  not satisfied only when there is onli 1 node in the  linked list.
+  {
+      new_turn(no);            <---  This function eliminate one kid every time.                                                          
+  }
+
+whene there is only one kid means this kid is winner.
+
+ if(c=='Y' || c=='y')
+{
+	       goto one_more_time;      <----- start the game again;
+}
+
+-----------------------------------------------------insert()--------------------------------------------------------------------------------------------------------------
+Now we will see the insert().
+
+new_child=(child*)malloc(sizeof(child));     <--- It is used to allocate memory for the node.
+
+copy the name into the name member of  the structure and give the address of itself.
+
+if new_child =NULL means there is no free space available and we can not create Linked list so program will terminate.
+
+if there is no kid in the linked list then new_child becomes the first_child.
+
+else  fake_child=first_child->addr ;    <----- start from the second node
+
+     while(fake_child->addr!=first_child) <----This is satisfied untill (fake_child!=last node).
+     {
+	fake_child=fake_child->addr;
+     }
+     new_child->addr=fake_child->addr; <----gives the address of the first_child in the addr part of new node.
+
+     fake_child->addr=new_child;            <----gives the address of the new node to the last node addr part.
+
+-----------------------------------------show_remainin()---------------------------------------------------------------------------------------------------
+
+   first_child->child_name      <---- this prints the name of first child
+
+   fake_child=first_child->addr;    <---- fake_child points to the second child
+
+   while(fake_child!=first_child)    <----this is satisfied untill (fake_child!=last node in the list).
+   {
+	printf("   %s",fake_child->child_name);
+
+	fake_child=fake_child->addr;
+
+   }
+
+-----------------------------------new_turn()-----------------------------------------------------------------------------------------------------------------
+
+ if(d==1)                        <----- If random number is entered 1 by user..!!
+  {
+    fake_child=first_child->addr;     <----fake_child points to 2nd child
+
+    while(fake_child!=first_child)    <---- This is satisfied untill(fake_child!=last node in the list).
+    {
+      pchild=fake_child;                     <----pchild points previous of the fake_child (in short last node)out of the while loop.
+
+      fake_child=fake_child->addr;
+    }
+
+    pchild->addr=fake_child->addr;  <--- puts the addr part of first_child into addr part of last
+
+    first_child=pchild->addr;                <----first_child=2nd child
+  }
+
+  else pass the d kids and then apply the same logic as above.
+   
+   -------------------------------------Have a Nice Day-------------------------------------------------------------------------------------------------------------------- 

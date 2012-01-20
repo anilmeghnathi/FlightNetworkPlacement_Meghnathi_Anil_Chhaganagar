@@ -1,0 +1,73 @@
+Respected Sir/Mam;
+
+I have created this game using Singly Linked List.
+I have done it in vary simple way.
+It may be possible that in some way my logic may not be perfectly correct.So please ignore it .Thanks.
+
+ struct stack
+{
+int no;                                  <--- Store number.
+struct stack *addr;            <----Store the address of the next node in the Linked List.
+};
+
+This code is used for creating a new node of the Linked List.structure member are as shown above.Here there is no need for structure variable.
+
+
+typedef struct stack stack;      <--- Used for giving Data Type a user define name.
+child *top=NULL;                        <--- Initially there is no child is there so NULL.
+
+top is used to store starting address of the linked list...
+
+void push(int);    <----- Function declaration.
+int pop();
+
+--------------------------------------main()---------------------------------------------------------------------------------------------------------
+
+int i;                                                        <---For for loop.
+int menu;                                              <---For menu
+int number;                                          <----For number in the linked list.
+int array[20];                                        <----For pattern; 
+int expected;                                       <----For number which is expected to enter by the user.
+
+if entered number is greater then 9 then no pushing is done.
+only if the entered number is expeted then pushing is done.or if at the starting if we enter 0 then pushing is done but in middle of the list it is not possible to insert 0.
+
+pop() fun return number at the last node of the list.and returned number is stored in the array[] which is used to for displaying pattern.
+if stack is empty -1 is returned by which is not stored in array[].
+
+
+-------------------------------------push()--------------------------------------------------------------------------------------------------------
+
+Now we will see the push().
+
+ added=(stack*)malloc(sizeof(stack));     <--- It is used to allocate memory for the node.
+
+copy the data into the no member of  the structure and give the address NULL.
+
+if there is no kid in the linked list then added node becomes the top of the stack.
+
+else
+{
+	fake=top;           <---start from top
+
+	while(fake->addr!=NULL)   <----This is satisfied untill (fake!=last node)
+	{
+	  fake=fake->addr;
+	}
+	fake->addr=added;           <----give the address of the added node to the last node's addr part.
+ }
+
+--------------------------------------------pop()-------------------------------------------------------------------------------------------------------------
+
+if top==NULL means stack is empty returns  -1
+else  
+    while(fake->addr!=NULL)     <----start from top.and loops untill (fake!=last node)
+    {
+      p=fake;                                    <----p is used for previous node of last (when contol is at out of the loop)
+      fake=fake->addr;
+    }
+
+if there is only one node then return number part of node and make top=NULL.
+else return the number part of last node.and assign NULL to the previous' addr part.
+
+------------------------------Have a Nice Day-----------------------------------------------------------------------------------------------------------
